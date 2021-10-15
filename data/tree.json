@@ -1,0 +1,50 @@
+{
+  "text": "Welcome Astronaut. You have been de-attached from the command pod and are hurtling towards the lunar surface and approximately 2000 m/s. Connection to mission control has been lost in the aforementioned accident. Finding a better landing spot is imperative.",
+  "question": "Time is of the essence, we could quicky identify a few suitable landing spots or we could make a more thoughrough scan of the lunar surface and the surrounding atmosphere.",
+  "answer": [
+    {
+      "option": "Activate the Quick Scan",
+      "question": "Identified two suitable landing spots. One in our proximity is in a crater, which is less than ideal but provides a decent chance of sucsess. there is also a flat surface which is more ideal approximately 400 km from your current trajectory and would require a lengthy burn to readjust.",
+      "answer": [
+        {
+          "option": "Crater",
+          "question": "Confirmed. Re-orienting Retrograde and throttling engines.\n\nWarning: Landing gear faliure detected.  Safe landing is not possible",
+          "answer": [
+            {},
+            {}
+          ]
+        },
+        {
+          "option": "Field",
+          "question": "Confirmed. Re-orienting Retrograde and throttling engines.\n\n\nWarning: Hull breach detected. Depressurization immenent. Detail: A small peice of debris has punctured the hull near the right external oxygen tank. Cabin pressure dropping and will be uninhabitable in 3 minutes.",
+          "answer": [
+            {},
+            {}
+          ]
+        }
+      ]
+    },
+    {
+      "option": "Thougroughly scan the surface",
+      "question": "Oh no! While scanning the surface, the computer warns you of a fuel tank leak! OH THE HUMANITY! Do you fix it or leave it?",
+      "answer": [
+        {
+          "option": "Ignore it becuase the outside enviornment may be dangerous ",
+          "question": "",
+          "answer": [
+            {},
+            {}
+          ]
+        },
+        {
+          "option": "Equip your spacesuit and come ",
+          "question": "",
+          "answer": [
+            {},
+            {}
+          ]
+        }
+      ]
+    }
+  ]
+}
