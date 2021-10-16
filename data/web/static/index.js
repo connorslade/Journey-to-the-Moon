@@ -1,4 +1,4 @@
-const waits = { ".": 300, ":": 500 };
+const waits = { ".": 300, ":": 500, "\n": 1000 };
 let text =
   "Welcome Astronaut. You have been de-attached from the command pod and are hurtling towards the lunar surface and approximately 2000 m/s.  Connection to mission control has been lost in the aforementioned accident. Finding a better landing spot is imperative.";
 
@@ -24,9 +24,10 @@ function updateScreenChar(index, toSpace) {
   if (toSpace) s = " ";
   new Audio("assets/blip2.mp3").play();
   let cons = document.querySelector("#console");
-  cons.innerHTML = `${cons.innerHTML.slice(0, cons.innerHTML.length - 28)}${s}${
-    text[index]
-  }<span class="blink">█</span>`;
+  cons.innerHTML = `${cons.innerHTML.slice(
+    0,
+    cons.innerHTML.length - 28
+  )}${s}${text[index].replace("\n", "<br>")}<span class="blink">█</span>`;
 
   setTimeout(() => updateScreenChar(index, false), delay);
 }

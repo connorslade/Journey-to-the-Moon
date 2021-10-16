@@ -1,3 +1,5 @@
+#![allow(clippy::redundant_closure_call)]
+
 use std::env;
 use std::fs;
 
@@ -11,8 +13,7 @@ const VERSION: &str = "0.0.0";
 const TREE_PATH: &str = "data/tree.json";
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let web_server = args.contains(&"--web".to_string());
+    let web_server = env::args().any(|x| x == *"--web");
 
     // TODO: Load from Config
     let ip = "0.0.0.0";

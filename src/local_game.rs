@@ -19,7 +19,7 @@ pub fn local_hame(data: Question) {
             to_print.push_str(&format!(
                 "{}) {}   ",
                 index,
-                i.option.unwrap_or("".to_string())
+                i.option.unwrap_or_else(|| "".to_string())
             ))
         }
 
@@ -38,7 +38,7 @@ pub fn local_hame(data: Question) {
             }
         };
 
-        if choice_i > question.answer.len() || choice_i <= 0 {
+        if choice_i > question.answer.len() || choice_i == 0 {
             println!("Invalid Option!\n");
             continue;
         }
