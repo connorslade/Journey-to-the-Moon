@@ -66,14 +66,14 @@ function init3D() {
     wireframe: true,
   });
 
-  renderer.setSize(window.innerWidth * 0.5 - 10, window.innerHeight * 0.5 - 10);
+  renderer.setSize(window.innerWidth * 0.5 - 30, window.innerHeight * 0.5 - 30);
   document.querySelector("#random").appendChild(renderer.domElement);
 
   let camera = new THREE.PerspectiveCamera(
     45,
     window.innerWidth / window.innerHeight,
-    0.1,
-    1000
+    1,
+    10
   );
   camera.position.z = 5;
 
@@ -98,14 +98,14 @@ function init3D() {
 
   window.addEventListener("resize", () => {
     renderer.setSize(
-      window.innerWidth * 0.5 - 10,
-      window.innerHeight * 0.5 - 10
+      window.innerWidth * 0.5 - 30,
+      window.innerHeight * 0.5 - 30
     );
     camera = new THREE.PerspectiveCamera(
-      75,
+      45,
       window.innerWidth / window.innerHeight,
-      0.1,
-      1000
+      1,
+      10
     );
     camera.position.z = 5;
   });
