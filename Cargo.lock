@@ -3,6 +3,12 @@
 version = 3
 
 [[package]]
+name = "afire"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "16be1cacdfb679f167cb91b2326fab3af8191dddeff6fbbcacf56142349edda1"
+
+[[package]]
 name = "itoa"
 version = "0.4.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -12,6 +18,7 @@ checksum = "b71991ff56294aa922b450139ee08b3bfc70982c6b2c7562771375cf73542dd4"
 name = "journey_to_the_moon"
 version = "0.1.0"
 dependencies = [
+ "afire",
  "serde_json",
 ]
 

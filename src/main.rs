@@ -5,6 +5,7 @@ use std::fs;
 mod common;
 mod local_game;
 mod parse;
+mod server;
 
 const VERSION: &str = "0.0.0";
 const TREE_PATH: &str = "data/tree.json";
@@ -12,6 +13,10 @@ const TREE_PATH: &str = "data/tree.json";
 fn main() {
     let args: Vec<String> = env::args().collect();
     let web_server = args.contains(&"--web".to_string());
+
+    // TODO: Load from Config
+    let ip = "localhost";
+    let port = 8081;
 
     println!("[*] Starting Journey to the Moon (V{})", VERSION);
 
@@ -24,6 +29,8 @@ fn main() {
     .unwrap());
 
     if web_server {
+        println!("[*] Starting Server ({}:{})\n", ip, port);
+        server::start_server(ip, port);
         return;
     }
 
