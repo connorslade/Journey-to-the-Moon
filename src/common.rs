@@ -43,3 +43,13 @@ macro_rules! time_print {
         res
     }};
 }
+
+/// Check if a string contains any values in a vector
+pub fn contains_any(text: &str, items: &[&str]) -> bool {
+    for item in items {
+        if text.contains(item) {
+            return true;
+        }
+    }
+    false
+}
