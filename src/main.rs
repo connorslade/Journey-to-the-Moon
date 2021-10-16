@@ -15,7 +15,7 @@ fn main() {
     let web_server = args.contains(&"--web".to_string());
 
     // TODO: Load from Config
-    let ip = "localhost";
+    let ip = "0.0.0.0";
     let port = 8081;
 
     println!("[*] Starting Journey to the Moon (V{})", VERSION);
