@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/three@0.133.1/build/three.min.js"></script>
+    <!-- <script src="https://unpkg.com/three/examples/js/loaders/GLTFLoader.js"></script> -->
+    <script src="https://unpkg.com/three/examples/js/loaders/STLLoader.js"></script>
     <script defer src="index.js"></script>
     <title>Journey to the Moon</title>
   </head>
@@ -12,7 +15,7 @@
   <body>
     <button class="start" type="button" id="start">Start</button>
 
-    <div class="wrap" id="wrap" style="filter: blur(5px)">
+    <div class="wrap" id="wrap" style="filter: blur(5px);">
       <div class="mainPane">
         <div class="consolePane">
           <p id="console"></p>
@@ -21,7 +24,7 @@
 
       <div class="rightPanes">
         <div class="infoPane"></div>
-        <div class="randomPane"></div>
+        <div class="randomPane" id="random"></div>
       </div>
     </div>
   </body>

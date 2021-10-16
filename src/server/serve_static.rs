@@ -54,6 +54,7 @@ fn get_type(path: &str) -> &str {
             "gif" => "image/gif",
             "ico" => "image/x-icon",
             "svg" => "image/svg+xml",
+            "glb" => "model/gltf-binary",
             _ => "application/octet-stream",
         },
 
