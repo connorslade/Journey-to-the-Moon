@@ -68,4 +68,30 @@ impl Question {
 
         questions
     }
+
+    pub fn jsonify(self) -> String {
+        let mut working = String::new();
+
+        let mut text = String::new();
+        if self.text.is_some() {
+            text = format!(r#""text":"{}","#, self.text.unwrap())
+        }
+
+        let mut option = String::new();
+        if self.option.is_some() {
+            option = format!(r#""option":"{}","#, self.option.unwrap())
+        }
+
+        let mut end = String::new();
+        if self.end.is_some() {
+            end = format!(r#""end":{},"#, self.end.unwrap())
+        }
+
+        working.push_str(&format!(
+            r#"{}{}{}"question":"{}""#,
+            text, option, end, self.question
+        ));
+
+        format!(r#"{{{}}}"#, working.replace('\n', "\\n"))
+    }
 }

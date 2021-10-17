@@ -44,12 +44,12 @@ macro_rules! time_print {
     }};
 }
 
-macro_rules! quick_res {
+macro_rules! quick_err {
     ($code:expr, $data:expr) => {{
         return Response::new(
             $code,
-            $data,
-            vec![Header::new("Content-Type", "text/plain")],
+            &format!(r#"{{"error":"{}"}}"#, $data),
+            vec![Header::new("Content-Type", "application/json")],
         );
     }};
 }
