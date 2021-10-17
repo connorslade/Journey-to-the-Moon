@@ -26,9 +26,12 @@ window.addEventListener("keydown", (e) => {
     document.querySelector("#console").innerHTML = "";
   }
   if (e.key !== " ") return;
-  if (!running && e.type === "keydown") startGame();
-  if (e.type === "keydown") speedy = true;
-  if (e.type === "keyup") speedy = false;
+  if (!running) startGame();
+  speedy = true;
+});
+
+window.addEventListener("keyup", (e) => {
+  if (e.key === " ") speedy = false;
 });
 
 // For drawing to the console

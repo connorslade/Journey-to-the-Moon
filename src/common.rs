@@ -44,6 +44,16 @@ macro_rules! time_print {
     }};
 }
 
+macro_rules! quick_res {
+    ($code:expr, $data:expr) => {{
+        return Response::new(
+            $code,
+            $data,
+            vec![Header::new("Content-Type", "text/plain")],
+        );
+    }};
+}
+
 /// Check if a string contains any values in a vector
 pub fn contains_any(text: &str, items: &[&str]) -> bool {
     for item in items {

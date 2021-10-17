@@ -13,6 +13,15 @@ pub fn local_hame(data: Question) {
         to_print.push_str(&question.question);
         to_print.push_str("\n\n");
 
+        if question.end.is_some() {
+            if question.end.unwrap() {
+                println!("{}\nYou Win!", to_print);
+                return;
+            }
+            println!("{}\nYou Loose...", to_print);
+            return;
+        }
+
         let mut index = 0;
         for i in question.clone().answer {
             index += 1;

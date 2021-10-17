@@ -6,6 +6,7 @@ pub struct Question {
     pub answer: Vec<Question>,
     pub text: Option<String>,
     pub option: Option<String>,
+    pub end: Option<bool>,
 }
 
 impl Question {
@@ -14,6 +15,7 @@ impl Question {
         answer: Vec<Question>,
         text: Option<&str>,
         option: Option<&str>,
+        end: Option<bool>,
     ) -> Question {
         let mut new_text: Option<String> = None;
         let mut new_option: Option<String> = None;
@@ -29,6 +31,7 @@ impl Question {
             answer,
             text: new_text,
             option: new_option,
+            end,
         }
     }
 
@@ -42,6 +45,7 @@ impl Question {
             answers,
             data["text"].as_str(),
             None,
+            data["end"].as_bool(),
         ))
     }
 
@@ -58,6 +62,7 @@ impl Question {
                 Question::parse_answers(i["answer"].clone()),
                 i["text"].as_str(),
                 i["option"].as_str(),
+                i["end"].as_bool(),
             ));
         }
 

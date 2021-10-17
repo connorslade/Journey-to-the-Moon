@@ -1,16 +1,66 @@
 {
   "id": 0,
-  "text": "Welcome Astronaut. You have been detached from the command pod and are hurtling towards the lunar surface at approximately 2000 m/s. Connection to mission control has been lost in the aforementioned accident. Finding a better landing spot is imperative.",
-  "question": "Time is of the essence, we could quicky identify a few suitable landing spots or we could make a more thoughrough scan of the lunar surface and the surrounding atmosphere.",
+  "text": "Welcome Astronaut. You have been de-attached from the command pod and are hurtling towards the lunar surface at approximately 2000 m/s. Connection to mission control has been lost in the aforementioned accident. Finding a suitable landing spot is imperative.",
+  "question": "Time is of the essence, we could quicky identify a few suitable landing spots or we could make a more thoughrough scan of the lunar surface",
   "answer": [
     {
       "id": 1,
-      "option": "Activate the Quick Scan",
+      "option": "Quickly survey the lunar surface",
       "question": "Identified two suitable landing spots. One in our proximity is in a crater, which is less than ideal but provides a decent chance of sucsess. there is also a flat surface which is more ideal approximately 400 km from your current trajectory and would require a lengthy burn to readjust.",
       "answer": [
         {
+          "id": 7,
           "option": "Crater",
-          "question": "Confirmed. Re-orienting Retrograde and throttling engines.\n\nWarning: Landing gear faliure detected.  Safe landing is not possible",
+          "question": "Confirmed. Re-orienting prograde. Passing by lunar debris field.\nWarning: navigation computer damaged b-\nWarning: land- \nWarning: navigation computer damaged by sm- \nWarning: landing gear critically da- \nWarning small- \nWarn- *BZZZT*",
+          "answer": [
+            {
+              "id": 8,
+              "option": "Wow the computers dead",
+              "question": "Incredible observation.\nYou somehow manage to make it down without any more catastrophes. You use up most of your fuel to slow down and wait why isnt the landing gear deployi-",
+              "answer": [],
+              "end": false
+            },
+            {
+              "id": 9,
+              "option": "Maybe theres something wrong with the landing gear.",
+              "question": "You suit up and head outside. \n\nOh wow yeah the motor controlling one of the legs is all mangled. If you had tried to deploy it it would have caused the solid fuel booster to activate without the liquid fuel thruster being repositioned which could cause an explosion. Good thing you checked this first! luckily electrical tape fixes everything.",
+              "answer": [
+                {
+                  "id": 8,
+                  "option": "Don't fix explosions sound fun.",
+                  "question": "Incredible observation.\nYou somehow manage to make it down without any more catastrophes. You use up most of your fuel to slow down and wait why isnt the landing gear deployi-",
+                  "answer": [],
+                  "end": false
+                },
+                {
+                  "id": 10,
+                  "option": "Electrical tape is love, electrical tape is life",
+                  "question": "You somehow manage to make it down without any more catastrophes. You use up most of your fuel to slow down and-\nOh boy another catastrophe. The exaust from your rocket is kicking up a lot of dust and making it impossible to see. You're almost out of fuel so you can't try and find a better spot.",
+                  "answer": [
+                    {
+                      "id": 11,
+                      "option": "Fortune favors the bold! Try and land the ship without vision.",
+                      "question": "Alright here we go\n\n...\n\nOkay i have no idea what im doing let me just... oh wait this isn't what-\n\nYou somehow flip the ship nose down and dive into the lunar surface",
+                      "answer": [],
+                      "end": false
+                    },
+                    {
+                      "id": 12,
+                      "option": "Hover to hopefully clear out all the dust, and watch your fuel slowly tick down to zero.",
+                      "question": "4%... 3%... 2%... Your ship's control panel is beeping very dramatically... one (im not delaying this oupercent..... the thrusters stop, you feel your stomach drop.\n\nWHAM! Your ship slams into the ground. The sudden impact gives you whiplish. Luckily you had coverred the ship in 43 kilograms of electrical tape which cussioned your fall. Electrical tape wins again.\n\n You step out of the capsule and look out onto the lunar surface. You've made it.\n\nAlso why couldnt you have just fired the ascent engine to put you back on a trajectory twords earth when you got disconnected from the command pod. Wouldnt that have-",
+                      "answer": [],
+                      "end": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "option": "Field",
+          "question": "Confirmed. Re-orienting Retrograde and throttling engines.\nWarning: Hull breach detected. Depressurization immenent. Detail: A small peice of debris has punctured the hull near the right external oxygen tank. Cabin pressure dropping and will be uninhabitable in 3 minutes.",
           "answer": [
             {
               "id": 3,
@@ -34,42 +84,7 @@
                 {
                   "id": 6,
                   "option": "Too risky :(",
-                  "question": "Your inaction has lead to your downfall! The suit runs out of oxygen. And you die. Incredible.",
-                  "answer": [],
-                  "end": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "id": 7,
-          "option": "Field",
-          "question": "Confirmed. Re-orienting Retrograde and throttling engines.\nWarning: Hull breach detected. Depressurization immenent. Detail: A small peice of debris has punctured the hull near the right external oxygen tank. Cabin pressure dropping and will be uninhabitable in 3 minutes.",
-          "answer": [
-            {
-              "id": 8,
-              "option": "Its probably just a glitch",
-              "question": "Yes of course. Theres no way this can go wrong.\nYou somehow manage to make it down without any more catastrophes. You use up most of your fuel to slow down and wait why isnt the landing gear deployi-",
-              "answer": [],
-              "end": false
-            },
-            {
-              "id": 9,
-              "option": "Maybe theres something wrong with the landing gear.",
-              "question": "You suit up and head outside.\nOh wow yeah the motor controlling one of the legs is all mangled. If you had tried to deploy it it would have caused the solid fuel booster to activate without the liquid fuel thruster being repositioned which could cause an explosion. Good thing you checked this first! luckily electrical tape fixes everything!",
-              "answer": [
-                {
-                  "id": 8,
-                  "option": "Don't fix explosions sound fun.",
-                  "question": "Yes of course. Theres no way this can go wrong.\nYou somehow manage to make it down without any more catastrophes. You use up most of your fuel to slow down and wait why isnt the landing gear deployi-",
-                  "answer": [],
-                  "end": false
-                },
-                {
-                  "id": 10,
-                  "option": "Electrical tape is love, electrical tape is life",
-                  "question": "Yes of course. Theres no way this can go wrong.\nYou somehow manage to make it down without any more catastrophes. You use up most of your fuel to slow down and wait why isnt the landing gear deployi-",
+                  "question": "you fool. you absolute buffoon. Your inaction has lead to your downfall! you think you can challenge me in my realm? you think you can rebel against my authority? you dare come into my house and upturn all my dining chairs and spill coffee grounds into my Keirug? You thought- anyway, the suit runs out of oxygen. And you die. Incredible.",
                   "answer": [],
                   "end": false
                 }
@@ -98,14 +113,14 @@
           "answer": [
             {
               "id": 16,
-              "option": "Fire the engines",
-              "question": "The engine firing gives the freefloating fuel and oxidizer a chance to ignite, and violently explode.\nIt looks very pretty.",
+              "option": "nah its fine just activate the thrusters",
+              "question": "The engine firing gives the freefloating fuel and oxidizer a chance to ignite, and violently explode.\nIt looks very pretty :)",
               "answer": [],
               "end": false
             },
             {
               "id": 17,
-              "option": "Fix the fuel tank",
+              "option": "god PLEASE fix the fuel tank",
               "question": "FINALLY you suit up, leave the ship, and patch the hole up. With electrical tape. Of course.\nAfter you re-enter the ship you see that you have significantly diverged from your path. You could spend your limited fuel to try and get back on path to the landing spot you found, or just hope for the best.",
               "answer": [
                 {
@@ -114,16 +129,25 @@
                   "question": "right... anyway you orient your ship downward and start slowing down. This is the final home stretch. You're almost there you can tas-\nCritical Warning: Fuel depleted\nThe thrusters stop. Oh right.",
                   "answer": [
                     {
+                      "id": 20,
                       "option": "keep the craft pointed thruster down and hope for the best",
                       "question": "",
                       "answer": []
                     },
                     {
+                      "id": 19,
                       "option": "Jump out with a parachute!",
-                      "question": "",
-                      "answer": []
+                      "question": "You fire the ejector seat. The sudden acceleration has you panic, then you start falling. It actually is a pretty strange feeling, with the moon's reduced gravity. You only have limited time to ponder this though, as your shuttle crashes into the ground, and a massive explosion that totally can happen in space blossoms out below you. Dammit not enough electrical tape.\n\nIn a flash of genius inspiration and incredible intellect you realize the parachute will be useless. The moon's atmosphere, if you can call it that, is around 1,000,000,000x less dense than earths. It might as well not be there, the only thing you can do as you plummet to the ground is hold on and hope as- and the parachute functions perfectly without air. I think we've given up any pretense of realism already so figures.\n\nYou softly land on the moon, your only way out a burning heap of slag next to you.",
+                      "answer": [],
+                      "end": true
                     }
                   ]
+                },
+                {
+                  "id": 20,
+                  "option": "Get back to your original planned landing spot",
+                  "question": "",
+                  "answer": []
                 }
               ]
             }
