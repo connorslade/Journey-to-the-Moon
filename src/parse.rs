@@ -2,6 +2,7 @@ use serde_json::Value;
 
 #[derive(Debug, Clone)]
 pub struct Question {
+    pub path: String,
     pub question: String,
     pub answer: Vec<Question>,
     pub text: Option<String>,
@@ -11,6 +12,7 @@ pub struct Question {
 
 impl Question {
     pub fn new(
+        path: &str,
         question: &str,
         answer: Vec<Question>,
         text: Option<&str>,
@@ -27,6 +29,7 @@ impl Question {
         }
 
         Question {
+            path: path.to_string(),
             question: question.to_string(),
             answer,
             text: new_text,
@@ -38,9 +41,10 @@ impl Question {
     pub fn parse_json(raw_data: String) -> Option<Question> {
         let data: Value = serde_json::from_str(&raw_data).ok()?;
 
-        let answers = Question::parse_answers(data["answer"].clone());
+        let answers = Question::parse_answers(data["answer"].clone(), "0");
 
         Some(Question::new(
+            "0",
             data["question"].as_str().unwrap(),
             answers,
             data["text"].as_str(),
@@ -49,28 +53,38 @@ impl Question {
         ))
     }
 
-    fn parse_answers(data: Value) -> Vec<Question> {
+    fn parse_answers(data: Value, path: &str) -> Vec<Question> {
         let mut questions = Vec::new();
         let answer = match data.as_array() {
             Some(a) => a,
             None => return Vec::new(),
         };
 
+        let mut index = 0;
         for i in answer {
+            let new_path = &format!("{}-{}", path, index);
             questions.push(Question::new(
+                new_path,
                 i["question"].as_str().unwrap_or(""),
-                Question::parse_answers(i["answer"].clone()),
+                Question::parse_answers(i["answer"].clone(), new_path),
                 i["text"].as_str(),
                 i["option"].as_str(),
                 i["end"].as_bool(),
             ));
+            index += 1;
         }
 
         questions
     }
 
     pub fn jsonify(self) -> String {
-        let mut working = String::new();
+        self.jsonify_in(0)
+    }
+
+    fn jsonify_in(self, depth: usize) -> String {
+        if depth > 1 {
+            return "".to_string();
+        }
 
         let mut text = String::new();
         if self.text.is_some() {
@@ -87,10 +101,23 @@ impl Question {
             end = format!(r#""end":{},"#, self.end.unwrap())
         }
 
-        working.push_str(&format!(
-            r#"{}{}{}"question":"{}""#,
-            text, option, end, self.question
-        ));
+        let mut answers = String::new();
+        for i in self.answer {
+            let json = i.jsonify_in(depth + 1);
+            answers.push_str(&format!(
+                r#"{}{}"#,
+                json,
+                if json.is_empty() { "" } else { "," }
+            ));
+        }
+        if !answers.is_empty() {
+            answers = format!(r#","answer":[{}]"#, answers);
+        }
+
+        let working = &format!(
+            r#""path":"{}",{}{}{}"question":"{}"{}"#,
+            self.path, text, option, end, self.question, answers
+        );
 
         format!(r#"{{{}}}"#, working.replace('\n', "\\n"))
     }

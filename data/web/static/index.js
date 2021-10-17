@@ -83,7 +83,10 @@ function init3D() {
     wireframe: true,
   });
 
-  renderer.setSize(window.innerWidth * 0.5 - 30, window.innerHeight * 0.5 - 30);
+  renderer.setSize(
+    window.innerWidth * 0.5 - window.innerHeight * 0.025,
+    window.innerHeight * 0.5 - window.innerHeight * 0.025
+  );
   document.querySelector("#random").appendChild(renderer.domElement);
 
   let camera = new THREE.PerspectiveCamera(
@@ -115,8 +118,8 @@ function init3D() {
 
   window.addEventListener("resize", () => {
     renderer.setSize(
-      window.innerWidth * 0.5 - 30,
-      window.innerHeight * 0.5 - 30
+      window.innerWidth * 0.5 - window.innerHeight * 0.025,
+      window.innerHeight * 0.5 - window.innerHeight * 0.025
     );
     camera = new THREE.PerspectiveCamera(
       45,
