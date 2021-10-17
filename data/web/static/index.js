@@ -2,24 +2,36 @@ const waits = { ".": 300, ":": 500, "\n": 1000 };
 let init3DStuff = false;
 let running = false;
 let speedy = false;
+let downKeys = {};
 let text =
-  "Welcome Astronaut. You have been de-attached from the command pod and are hurtling towards the lunar surface and approximately 2000 m/s.  Connection to mission control has been lost in the aforementioned accident. Finding a better landing spot is imperative.";
+  "Notice: Detected lunar debris field, ETA: 2.00m Leaving the vessel will expidite death.\n\n...\n\nWarning: Debris has openned a major puncture in the fuel tank. Please resolve this ASAP by-\n\nWarning: Do not leave the vessel we are currently passing by an orbital debris field";
 
+// Make start button... start the game
 document.querySelector("#start").addEventListener("click", startGame);
 
-window.onkeydown = window.onkeyup = (e) => {
-  if (e.type === "keydown" && e.keyCode === 82) {
+// Kaybord Sound Stuff
+window.addEventListener("keydown", (e) => {
+  if (downKeys[e.key]) return;
+  downKeys[e.key] = true;
+  new Audio("assets/keyPress.mp3").play();
+});
+window.addEventListener("keyup", (e) => (downKeys[e.key] = false));
+
+// Speedup and Reset keyboard stuff
+window.addEventListener("keydown", (e) => {
+  if (e.key === "r") {
     running = false;
     document.querySelector("#start").style.opacity = "1";
     document.querySelector("#wrap").style.filter = "blur(5px)";
     document.querySelector("#console").innerHTML = "";
   }
-  if (e.keyCode !== 32) return;
+  if (e.key !== " ") return;
   if (!running && e.type === "keydown") startGame();
   if (e.type === "keydown") speedy = true;
   if (e.type === "keyup") speedy = false;
-};
+});
 
+// For drawing to the console
 function updateScreenChar(index, toSpace) {
   index++;
   if (!running) return;
@@ -47,6 +59,8 @@ function updateScreenChar(index, toSpace) {
   setTimeout(() => updateScreenChar(index, false), delay);
 }
 
+// Start the game
+// ... if the name wasent clear
 function startGame() {
   running = true;
   if (!init3DStuff) init3D();

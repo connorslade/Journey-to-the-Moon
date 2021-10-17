@@ -1,8 +1,10 @@
 {
-  "text": "Welcome Astronaut. You have been de-attached from the command pod and are hurtling towards the lunar surface and approximately 2000 m/s. Connection to mission control has been lost in the aforementioned accident. Finding a better landing spot is imperative.",
+  "id": 0,
+  "text": "Welcome Astronaut. You have been detached from the command pod and are hurtling towards the lunar surface at approximately 2000 m/s. Connection to mission control has been lost in the aforementioned accident. Finding a better landing spot is imperative.",
   "question": "Time is of the essence, we could quicky identify a few suitable landing spots or we could make a more thoughrough scan of the lunar surface and the surrounding atmosphere.",
   "answer": [
     {
+      "id": 1,
       "option": "Activate the Quick Scan",
       "question": "Identified two suitable landing spots. One in our proximity is in a crater, which is less than ideal but provides a decent chance of sucsess. there is also a flat surface which is more ideal approximately 400 km from your current trajectory and would require a lengthy burn to readjust.",
       "answer": [
@@ -10,38 +12,121 @@
           "option": "Crater",
           "question": "Confirmed. Re-orienting Retrograde and throttling engines.\n\nWarning: Landing gear faliure detected.  Safe landing is not possible",
           "answer": [
-            {},
-            {}
+            {
+              "id": 3,
+              "option": "Put on your space suit, go outside, and fix the leak",
+              "question": "Unfortunately, your scanners completely missed a giant debris field you were travelling through at 2000 m/s. As soon as you go out you notice the hull literred with small indentations. Then a small price of debris peirces your skull.",
+              "answer": [],
+              "end": false
+            },
+            {
+              "id": 4,
+              "option": "Put on your space suit and let the cabin depressurize",
+              "question": "Warning: passing lunar debris field. Leaving the vessel will expidite death.\nProbably a good thing you didnt leave.\nWow its taking a while to get to the moon. I'll run out of oxygen at this rate, I need to siphon oxygen from one of the external oxygen tanks. But we're still in the debris field!",
+              "answer": [
+                {
+                  "id": 5,
+                  "option": "Risk it for the biscuit (or oxygen in this case)",
+                  "question": "You barely get out of the ship before a small peice of metal peirces your heart. What did you expect. Youre travelling through a debris field at 2000 m/s.",
+                  "answer": [],
+                  "end": false
+                },
+                {
+                  "id": 6,
+                  "option": "Too risky :(",
+                  "question": "Your inaction has lead to your downfall! The suit runs out of oxygen. And you die. Incredible.",
+                  "answer": [],
+                  "end": false
+                }
+              ]
+            }
           ]
         },
         {
+          "id": 7,
           "option": "Field",
-          "question": "Confirmed. Re-orienting Retrograde and throttling engines.\n\n\nWarning: Hull breach detected. Depressurization immenent. Detail: A small peice of debris has punctured the hull near the right external oxygen tank. Cabin pressure dropping and will be uninhabitable in 3 minutes.",
+          "question": "Confirmed. Re-orienting Retrograde and throttling engines.\nWarning: Hull breach detected. Depressurization immenent. Detail: A small peice of debris has punctured the hull near the right external oxygen tank. Cabin pressure dropping and will be uninhabitable in 3 minutes.",
           "answer": [
-            {},
-            {}
+            {
+              "id": 8,
+              "option": "Its probably just a glitch",
+              "question": "Yes of course. Theres no way this can go wrong.\nYou somehow manage to make it down without any more catastrophes. You use up most of your fuel to slow down and wait why isnt the landing gear deployi-",
+              "answer": [],
+              "end": false
+            },
+            {
+              "id": 9,
+              "option": "Maybe theres something wrong with the landing gear.",
+              "question": "You suit up and head outside.\nOh wow yeah the motor controlling one of the legs is all mangled. If you had tried to deploy it it would have caused the solid fuel booster to activate without the liquid fuel thruster being repositioned which could cause an explosion. Good thing you checked this first! luckily electrical tape fixes everything!",
+              "answer": [
+                {
+                  "id": 8,
+                  "option": "Don't fix explosions sound fun.",
+                  "question": "Yes of course. Theres no way this can go wrong.\nYou somehow manage to make it down without any more catastrophes. You use up most of your fuel to slow down and wait why isnt the landing gear deployi-",
+                  "answer": [],
+                  "end": false
+                },
+                {
+                  "id": 10,
+                  "option": "Electrical tape is love, electrical tape is life",
+                  "question": "Yes of course. Theres no way this can go wrong.\nYou somehow manage to make it down without any more catastrophes. You use up most of your fuel to slow down and wait why isnt the landing gear deployi-",
+                  "answer": [],
+                  "end": false
+                }
+              ]
+            }
           ]
         }
       ]
     },
     {
+      "id": 13,
       "option": "Thougroughly scan the surface",
-      "question": "Oh no! While scanning the surface, the computer warns you of a fuel tank leak! OH THE HUMANITY! Do you fix it or leave it?",
+      "question": "Notice: Detected lunar debris field, ETA: 2.00m Leaving the vessel will expidite death.\n\n...\n\nWarning: Debris has openned a major puncture in the fuel tank. Please resolve this ASAP by- Warning: Do not leave the vessel we are currently passing by an orbital debris field",
       "answer": [
         {
-          "option": "Ignore it becuase the outside enviornment may be dangerous ",
-          "question": "",
-          "answer": [
-            {},
-            {}
-          ]
+          "id": 14,
+          "option": "Leave the vessel while it is currently passing by an orbital debris field",
+          "question": "The debris field is a little risky to traverse when you're speeding at 2 kilometers a second. You discover this fact when a small rock slams into your skull 5 seconds after you leave the ship",
+          "answer": [],
+          "end": false
         },
         {
-          "option": "Equip your spacesuit and come ",
-          "question": "",
+          "id": 15,
+          "option": "Try and ignore the beeping and continue scanning",
+          "question": "Notice: exiting debris field\nNotice: landing spot found\nIt took a while to leave the debris field. The scans have identified a good landing spot but to be able to get there you need to fire the engines NOW!",
           "answer": [
-            {},
-            {}
+            {
+              "id": 16,
+              "option": "Fire the engines",
+              "question": "The engine firing gives the freefloating fuel and oxidizer a chance to ignite, and violently explode.\nIt looks very pretty.",
+              "answer": [],
+              "end": false
+            },
+            {
+              "id": 17,
+              "option": "Fix the fuel tank",
+              "question": "FINALLY you suit up, leave the ship, and patch the hole up. With electrical tape. Of course.\nAfter you re-enter the ship you see that you have significantly diverged from your path. You could spend your limited fuel to try and get back on path to the landing spot you found, or just hope for the best.",
+              "answer": [
+                {
+                  "id": 18,
+                  "option": "The power of electrical tape will save me! YOLO",
+                  "question": "right... anyway you orient your ship downward and start slowing down. This is the final home stretch. You're almost there you can tas-\nCritical Warning: Fuel depleted\nThe thrusters stop. Oh right.",
+                  "answer": [
+                    {
+                      "option": "keep the craft pointed thruster down and hope for the best",
+                      "question": "",
+                      "answer": []
+                    },
+                    {
+                      "option": "Jump out with a parachute!",
+                      "question": "",
+                      "answer": []
+                    }
+                  ]
+                }
+              ]
+            }
           ]
         }
       ]
