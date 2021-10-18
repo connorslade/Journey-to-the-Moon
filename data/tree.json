@@ -146,8 +146,9 @@
                 {
                   "id": 20,
                   "option": "Get back to your original planned landing spot",
-                  "question": "",
-                  "answer": []
+                  "question": "Yeah that seems like the best choice.\n\nYou watch as the lunar surface speeds closer. Impact in 5 seconds, 4 seconds... 3... 2... 1-\n\nThe ascent engine crashes into the ground and explodes. incredible",
+                  "answer": [],
+                  "end": true
                 }
               ]
             }
