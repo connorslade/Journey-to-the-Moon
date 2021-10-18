@@ -6,7 +6,7 @@ body {
   background: #000000;
   font-family: monospace;
   font-size: 1vw;
-  color: greenyellow;
+  color: #00ff00;
   width: 100%;
   margin: 0;
 }
@@ -44,7 +44,7 @@ p {
 
 .consolePane {
   box-sizing: border-box;
-  border: 1px solid greenyellow;
+  border: 1px solid #00ff00;
   border-radius: 10px;
   margin: 0.5vh 0.25vw 0.5vh 0.25vw;
   height: 99vh;
@@ -53,7 +53,7 @@ p {
 
 .infoPane {
   box-sizing: border-box;
-  border: 1px solid greenyellow;
+  border: 1px solid #00ff00;
   border-radius: 10px;
   margin: 0.5vh 0.25vw 0.5vh 0.25vw;
   height: 49vh;
@@ -62,7 +62,7 @@ p {
 
 .randomPane {
   box-sizing: border-box;
-  border: 1px solid greenyellow;
+  border: 1px solid #00ff00;
   border-radius: 10px;
   margin: 1vh 0.25vw 0.5vh 0.25vw;
   height: 49vh;

@@ -3,8 +3,8 @@ let init3DStuff = false;
 let running = false;
 let speedy = false;
 let downKeys = {};
-let text =
-  "Notice: Detected lunar debris field, ETA: 2.00m Leaving the vessel will expidite death.\n\n...\n\nWarning: Debris has openned a major puncture in the fuel tank. Please resolve this ASAP by-\n\nWarning: Do not leave the vessel we are currently passing by an orbital debris field";
+
+const printTextDone = new Event('printTextDone');
 
 // Make start button... start the game
 document.querySelector("#start").addEventListener("click", startGame);
@@ -34,11 +34,19 @@ window.addEventListener("keyup", (e) => {
   if (e.key === " ") speedy = false;
 });
 
+window.addEventListener('printTextDone', () => {
+  console.log("DONE!");
+});
+
 // For drawing to the console
-function updateScreenChar(index, toSpace) {
+function updateScreenChar(text, index, toSpace) {
+  keysRuning = true;
   index++;
   if (!running) return;
-  if (index >= text.length) return;
+  if (index >= text.length) {
+    window.dispatchEvent(printTextDone);
+    return;
+  }
 
   let delay = 50;
   if (Object.keys(waits).includes(text[index])) delay = waits[text[index]];
@@ -47,7 +55,7 @@ function updateScreenChar(index, toSpace) {
   new Audio("assets/blip2.mp3").play();
 
   if (text[index] === " ") {
-    setTimeout(() => updateScreenChar(index, true), delay);
+    setTimeout(() => updateScreenChar(text, index, true), delay);
     return;
   }
 
@@ -59,7 +67,7 @@ function updateScreenChar(index, toSpace) {
     cons.innerHTML.length - 28
   )}${s}${text[index].replace("\n", "<br>")}<span class="blink">█</span>`;
 
-  setTimeout(() => updateScreenChar(index, false), delay);
+  setTimeout(() => updateScreenChar(text, index, false), delay);
 }
 
 // Start the game
@@ -69,7 +77,13 @@ function startGame() {
   if (!init3DStuff) init3D();
   document.querySelector("#start").style.opacity = "0";
   document.querySelector("#wrap").style.filter = "";
-  setTimeout(() => updateScreenChar(-1, false), 750);
+  setTimeout(() => {
+    updateScreenChar(
+      "4%... 3%... 2%... Your ship's control panel is beeping very dramatically... one (im not delaying this oupercent..... the thrusters stop, you feel your stomach drop.\n\nWHAM! Your ship slams into the ground. The sudden impact gives you whiplish. Luckily you had coverred the ship in 43 kilograms of electrical tape which cussioned your fall. Electrical tape wins again.\n\n You step out of the capsule and look out onto the lunar surface. You've made it.\n\nAlso why couldnt you have just fired the ascent engine to put you back on a trajectory twords earth when you got disconnected from the command pod. Wouldnt that have-",
+      -1,
+      false
+    );
+  }, 750);
 }
 
 // 3D Garbage
