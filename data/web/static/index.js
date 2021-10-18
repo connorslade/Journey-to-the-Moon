@@ -1,10 +1,11 @@
 const waits = { ".": 300, ":": 500, "\n": 1000 };
 let init3DStuff = false;
+let validOptions = [];
 let running = false;
 let speedy = false;
 let downKeys = {};
 
-const printTextDone = new Event('printTextDone');
+const printTextDone = new Event("printTextDone");
 
 // Make start button... start the game
 document.querySelector("#start").addEventListener("click", startGame);
@@ -19,6 +20,10 @@ window.addEventListener("keyup", (e) => (downKeys[e.key] = false));
 
 // Speedup and Reset keyboard stuff
 window.addEventListener("keydown", (e) => {
+  if (validOptions.includes(e.key)) {
+
+  }
+
   if (e.key === "r") {
     running = false;
     document.querySelector("#start").style.opacity = "1";
@@ -34,7 +39,8 @@ window.addEventListener("keyup", (e) => {
   if (e.key === " ") speedy = false;
 });
 
-window.addEventListener('printTextDone', () => {
+// Called when a Print Text Job Finishes
+window.addEventListener("printTextDone", () => {
   console.log("DONE!");
 });
 
@@ -77,13 +83,24 @@ function startGame() {
   if (!init3DStuff) init3D();
   document.querySelector("#start").style.opacity = "0";
   document.querySelector("#wrap").style.filter = "";
-  setTimeout(() => {
-    updateScreenChar(
-      "4%... 3%... 2%... Your ship's control panel is beeping very dramatically... one (im not delaying this oupercent..... the thrusters stop, you feel your stomach drop.\n\nWHAM! Your ship slams into the ground. The sudden impact gives you whiplish. Luckily you had coverred the ship in 43 kilograms of electrical tape which cussioned your fall. Electrical tape wins again.\n\n You step out of the capsule and look out onto the lunar surface. You've made it.\n\nAlso why couldnt you have just fired the ascent engine to put you back on a trajectory twords earth when you got disconnected from the command pod. Wouldnt that have-",
-      -1,
-      false
-    );
-  }, 750);
+  fetch("/api/option?q=0")
+    .then((r) => r.json())
+    .then((data) => {
+      let options = "";
+
+      data.answer.forEach((item, i) => {
+        validOptions.push(item + '');
+        options += `${i}) ${item.option} `;
+      });
+
+      setTimeout(() => {
+        updateScreenChar(
+          `${data.text}\n\n${data.question}\n\n${options.trim()}\n\n>`,
+          -1,
+          false
+        );
+      }, 750);
+    });
 }
 
 // 3D Garbage

@@ -18,7 +18,7 @@ pub fn local_hame(data: Question) {
                 println!("{}\nYou Win!", to_print);
                 return;
             }
-            println!("{}\nYou Loose...", to_print);
+            println!("{}\nYou Lose...", to_print);
             return;
         }
 

@@ -111,6 +111,7 @@ impl Question {
             ));
         }
         if !answers.is_empty() {
+            answers = answers[0..answers.len() - 1].to_string();
             answers = format!(r#","answer":[{}]"#, answers);
         }
 
