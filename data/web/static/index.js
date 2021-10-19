@@ -51,8 +51,13 @@ window.addEventListener("keydown", (e) => {
   }
 
   if (e.key === "r") {
+    validOptions = [];
     running = false;
+    typeing = false;
+    this_path = [];
+    downKeys = {};
     input = "";
+    ask = "";
     document.querySelector("#start").style.opacity = "1";
     document.querySelector("#title").style.opacity = "1";
     document.querySelector("#credits").style.opacity = "1";
@@ -137,9 +142,8 @@ function textPath(path) {
       }
 
       if ("end" in data) {
-        ask = "\n\n<strong>";
+        ask = "\n\n";
         ask += data.end ? "You Win! Woo!" : "You Lose... oop";
-        ask += '</strong>'
         document.getElementsByClassName("blink")[0].scrollIntoView();
       }
 
