@@ -2,50 +2,75 @@ const waits = { ".": 300, ":": 500, "\n": 1000 };
 let init3DStuff = false;
 let validOptions = [];
 let running = false;
-let speedy = false;
+let typeing = false;
 let downKeys = {};
+let input = "";
+let ask = "";
 
 const printTextDone = new Event("printTextDone");
+const cons = document.querySelector("#console");
 
 // Make start button... start the game
 document.querySelector("#start").addEventListener("click", startGame);
 
-// Kaybord Sound Stuff
+window.addEventListener("keyup", (e) => {
+  downKeys[e.key] = false;
+});
+
+// Speedup and Reset keyboard stuff
 window.addEventListener("keydown", (e) => {
   if (downKeys[e.key]) return;
   downKeys[e.key] = true;
   new Audio("assets/keyPress.mp3").play();
-});
-window.addEventListener("keyup", (e) => (downKeys[e.key] = false));
 
-// Speedup and Reset keyboard stuff
-window.addEventListener("keydown", (e) => {
-  if (validOptions.includes(e.key)) {
+  if (validOptions.includes(e.key) && typeing) {
+    input += e.key;
+    cons.innerHTML = `${cons.innerHTML.slice(0, cons.innerHTML.length - 28)}${
+      e.key
+    }<span class="blink">█</span>`;
+  }
 
+  if (e.key === "Backspace") {
+    let cons = document.querySelector("#console");
+    cons.innerHTML = `${cons.innerHTML.slice(
+      0,
+      cons.innerHTML.length - 29
+    )}<span class="blink">█</span>`;
+  }
+
+  if (e.key === "Enter" && typeing) {
+    typeing = false;
+
+    cons.innerHTML = `${cons.innerHTML.slice(
+      0,
+      cons.innerHTML.length - 28
+    )}${"<br><br>"}<span class="blink">█</span>`;
+
+    textPath(`0-${parseInt(input)}`);
   }
 
   if (e.key === "r") {
     running = false;
+    input = "";
     document.querySelector("#start").style.opacity = "1";
+    document.querySelector("#title").style.opacity = "1";
+    document.querySelector("#credits").style.opacity = "1";
     document.querySelector("#wrap").style.filter = "blur(5px)";
-    document.querySelector("#console").innerHTML = "";
+    document.querySelector("#console").innerHTML =
+      '<span class="blink">█</span>';
   }
-  if (e.key !== " ") return;
+  if (e.key !== " " && e.key !== "Enter") return;
   if (!running) startGame();
-  speedy = true;
-});
-
-window.addEventListener("keyup", (e) => {
-  if (e.key === " ") speedy = false;
 });
 
 // Called when a Print Text Job Finishes
 window.addEventListener("printTextDone", () => {
-  console.log("DONE!");
+  typeing = true;
 });
 
 // For drawing to the console
 function updateScreenChar(text, index, toSpace) {
+  typeing = false;
   keysRuning = true;
   index++;
   if (!running) return;
@@ -56,24 +81,54 @@ function updateScreenChar(text, index, toSpace) {
 
   let delay = 50;
   if (Object.keys(waits).includes(text[index])) delay = waits[text[index]];
-  if (speedy) delay /= 2;
+  if (downKeys[" "]) delay /= 2;
 
-  new Audio("assets/blip2.mp3").play();
+  if (downKeys["s"]) {
+    cons.innerHTML = `${cons.innerHTML.slice(
+      index,
+      cons.innerHTML.length - 28
+    )}${toSpace ? " " : ""}${text.replace(
+      /\n/g,
+      "<br> "
+    )}<span class="blink">█</span>`;
+    window.dispatchEvent(printTextDone);
+    return;
+  }
+  new Audio("assets/blip.mp3").play();
 
   if (text[index] === " ") {
     setTimeout(() => updateScreenChar(text, index, true), delay);
     return;
   }
 
-  let s = "";
-  if (toSpace) s = " ";
-  let cons = document.querySelector("#console");
-  cons.innerHTML = `${cons.innerHTML.slice(
-    0,
-    cons.innerHTML.length - 28
-  )}${s}${text[index].replace("\n", "<br>")}<span class="blink">█</span>`;
+  cons.innerHTML = `${cons.innerHTML.slice(0, cons.innerHTML.length - 28)}${
+    toSpace ? " " : ""
+  }${text[index].replace("\n", "<br>")}<span class="blink">█</span>`;
 
   setTimeout(() => updateScreenChar(text, index, false), delay);
+}
+
+function textPath(path) {
+  fetch("/api/option?q=" + path)
+    .then((r) => r.json())
+    .then((data) => {
+      let options = "";
+
+      data.answer.forEach((item, i) => {
+        validOptions = validOptions.concat(i.toString().split(""));
+        options += `${i}) ${item.option} `;
+      });
+
+      ask = `\n\n${options.trim()}\n\n>`;
+
+      setTimeout(() => {
+        updateScreenChar(
+          `${data.text ? `${data.text}\n\n` : ""}${data.question}${ask}`,
+          -1,
+          false
+        );
+      }, 750);
+    });
 }
 
 // Start the game
@@ -82,25 +137,10 @@ function startGame() {
   running = true;
   if (!init3DStuff) init3D();
   document.querySelector("#start").style.opacity = "0";
+  document.querySelector("#title").style.opacity = "0";
+  document.querySelector("#credits").style.opacity = "0";
   document.querySelector("#wrap").style.filter = "";
-  fetch("/api/option?q=0")
-    .then((r) => r.json())
-    .then((data) => {
-      let options = "";
-
-      data.answer.forEach((item, i) => {
-        validOptions.push(item + '');
-        options += `${i}) ${item.option} `;
-      });
-
-      setTimeout(() => {
-        updateScreenChar(
-          `${data.text}\n\n${data.question}\n\n${options.trim()}\n\n>`,
-          -1,
-          false
-        );
-      }, 750);
-    });
+  textPath("0");
 }
 
 // 3D Garbage
@@ -115,8 +155,8 @@ function init3D() {
   });
 
   renderer.setSize(
-    window.innerWidth * 0.5 - window.innerHeight * 0.025,
-    window.innerHeight * 0.5 - window.innerHeight * 0.025
+    window.innerWidth * 0.5 - window.innerHeight * 0.025 - 30,
+    window.innerHeight * 0.5 - window.innerHeight * 0.005 - 30
   );
   document.querySelector("#random").appendChild(renderer.domElement);
 
@@ -149,8 +189,8 @@ function init3D() {
 
   window.addEventListener("resize", () => {
     renderer.setSize(
-      window.innerWidth * 0.5 - window.innerHeight * 0.025,
-      window.innerHeight * 0.5 - window.innerHeight * 0.025
+      window.innerWidth * 0.5 - window.innerHeight * 0.025 - 30,
+      window.innerHeight * 0.5 - window.innerHeight * 0.005 - 30
     );
     camera = new THREE.PerspectiveCamera(
       45,
