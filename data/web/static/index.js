@@ -3,6 +3,7 @@ let init3DStuff = false;
 let validOptions = [];
 let running = false;
 let typeing = false;
+let this_path = [];
 let downKeys = {};
 let input = "";
 let ask = "";
@@ -46,7 +47,7 @@ window.addEventListener("keydown", (e) => {
       cons.innerHTML.length - 28
     )}${"<br><br>"}<span class="blink">█</span>`;
 
-    textPath(`0-${parseInt(input)}`);
+    textPath(`${this_path.join("-")}-${parseInt(input)}`);
   }
 
   if (e.key === "r") {
@@ -65,6 +66,7 @@ window.addEventListener("keydown", (e) => {
 
 // Called when a Print Text Job Finishes
 window.addEventListener("printTextDone", () => {
+  input = "";
   typeing = true;
 });
 
@@ -84,13 +86,11 @@ function updateScreenChar(text, index, toSpace) {
   if (downKeys[" "]) delay /= 2;
 
   if (downKeys["s"]) {
-    cons.innerHTML = `${cons.innerHTML.slice(
-      index,
-      cons.innerHTML.length - 28
-    )}${toSpace ? " " : ""}${text.replace(
-      /\n/g,
-      "<br> "
-    )}<span class="blink">█</span>`;
+    // running = false;
+    cons.innerHTML = `${cons.innerHTML.slice(0, cons.innerHTML.length - 28)}${
+      toSpace ? " " : ""
+    }${text.slice(index, text.length).replace(/\n/g, "<br>")}<span class="blink">█</span>`;
+    document.getElementsByClassName("blink")[0].scrollIntoView();
     window.dispatchEvent(printTextDone);
     return;
   }
@@ -104,31 +104,52 @@ function updateScreenChar(text, index, toSpace) {
   cons.innerHTML = `${cons.innerHTML.slice(0, cons.innerHTML.length - 28)}${
     toSpace ? " " : ""
   }${text[index].replace("\n", "<br>")}<span class="blink">█</span>`;
+  document.getElementsByClassName("blink")[0].scrollIntoView();
 
   setTimeout(() => updateScreenChar(text, index, false), delay);
 }
 
 function textPath(path) {
-  fetch("/api/option?q=" + path)
-    .then((r) => r.json())
-    .then((data) => {
+  let parts = path.split("-");
+  this_path.push(parts[parts.length - 1]);
+  fetch("/api/option?q=" + path).then((r) => {
+    if (r.status !== 200) {
+      this_path.pop();
+      input = "";
+      updateScreenChar(
+        ` Invalid Option... Lets try that again${ask}`,
+        0,
+        false
+      );
+      return;
+    }
+
+    r.json().then((data) => {
       let options = "";
+      ask = "";
 
-      data.answer.forEach((item, i) => {
-        validOptions = validOptions.concat(i.toString().split(""));
-        options += `${i}) ${item.option} `;
-      });
+      if ("answer" in data) {
+        data.answer.forEach((item, i) => {
+          validOptions = validOptions.concat(i.toString().split(""));
+          options += `${i}) ${item.option}\n`;
+        });
+        ask = `\n\n${options.trim()}\n\n>`;
+      }
 
-      ask = `\n\n${options.trim()}\n\n>`;
+      if ("end" in data) {
+        ask = "\n\n<strong>";
+        ask += data.end ? "You Win! Woo!" : "You Lose... oop";
+        ask += '</strong>'
+        document.getElementsByClassName("blink")[0].scrollIntoView();
+      }
 
-      setTimeout(() => {
-        updateScreenChar(
-          `${data.text ? `${data.text}\n\n` : ""}${data.question}${ask}`,
-          -1,
-          false
-        );
-      }, 750);
+      updateScreenChar(
+        `${data.text ? `${data.text}\n\n` : ""}${data.question}${ask}`,
+        -1,
+        false
+      );
     });
+  });
 }
 
 // Start the game
@@ -140,7 +161,8 @@ function startGame() {
   document.querySelector("#title").style.opacity = "0";
   document.querySelector("#credits").style.opacity = "0";
   document.querySelector("#wrap").style.filter = "";
-  textPath("0");
+
+  setTimeout(() => textPath("0"), 750);
 }
 
 // 3D Garbage

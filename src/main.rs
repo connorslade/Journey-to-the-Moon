@@ -32,7 +32,7 @@ fn main() {
     let raw_data = time_print!("[*] Reading Tree", || fs::read_to_string(TREE_PATH)
         .unwrap()
         .replace('\r', ""));
-    let data = time_print!("[*] Parseing Tree", || Question::parse_json(raw_data)
+        let data = time_print!("[*] Parseing Tree", || Question::parse_json(raw_data)
         .unwrap());
 
     unsafe { DATA = Some(data.clone()) }

@@ -69,6 +69,8 @@ p {
   margin: 0.5vh 0.25vw 0.5vh 0.25vw;
   height: 99vh;
   padding: 15px;
+  overflow-y: scroll;
+  scrollbar-width: none;
 }
 
 .infoPane {
