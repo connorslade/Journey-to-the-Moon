@@ -69,7 +69,7 @@ window.addEventListener("keydown", (e) => {
     )}<span class="blink">█</span>`;
   }
 
-  if (e.key === "Enter" && typeing) {
+  if (e.key === "Enter" && typeing && running) {
     typeing = false;
 
     cons.innerHTML = `${cons.innerHTML.slice(
@@ -141,7 +141,9 @@ function updateScreenChar(text, index, toSpace) {
   cons.innerHTML = `${cons.innerHTML.slice(0, cons.innerHTML.length - 28)}${
     toSpace ? " " : ""
   }${text[index].replace("\n", "<br>")}<span class="blink">█</span>`;
-  document.getElementsByClassName("blink")[0].scrollIntoView();
+  document
+    .getElementsByClassName("blink")[0]
+    .scrollIntoView({ behavior: "smooth" });
 
   setTimeout(() => updateScreenChar(text, index, false), delay);
 }
@@ -177,6 +179,7 @@ function textPath(path) {
         ask = "\n\n";
         ask += data.end ? "You Win! Woo!" : "You Lose... oop";
         document.getElementsByClassName("blink")[0].scrollIntoView();
+        // running = typeing = false;
       }
 
       updateScreenChar(
@@ -260,7 +263,6 @@ function init3D() {
     camera.position.z = 5;
   });
 }
-
 
 // display random crap on the side of the screen that does literally nothing and is completely useless
 // nice comment ↗
