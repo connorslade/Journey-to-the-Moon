@@ -31,7 +31,7 @@ pub fn add_route(server: &mut Server) {
             this_question = &this_question.answer[i];
         }
 
-        let resp = format!("{}", this_question.clone().jsonify());
+        let resp = this_question.clone().jsonify();
         Response::new(
             200,
             &resp,

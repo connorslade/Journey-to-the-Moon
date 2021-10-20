@@ -60,8 +60,7 @@ impl Question {
             None => return Vec::new(),
         };
 
-        let mut index = 0;
-        for i in answer {
+        for (index, i) in answer.iter().enumerate() {
             let new_path = &format!("{}-{}", path, index);
             questions.push(Question::new(
                 new_path,
@@ -71,7 +70,6 @@ impl Question {
                 i["option"].as_str(),
                 i["end"].as_bool(),
             ));
-            index += 1;
         }
 
         questions
