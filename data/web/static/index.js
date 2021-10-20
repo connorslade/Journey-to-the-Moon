@@ -8,8 +8,38 @@ let downKeys = {};
 let input = "";
 let ask = "";
 
+const garble = [
+  "          Orbital Resonance",
+  "          Retrograde Apathy",
+  "         Delta Hamming Code",
+  "         Periapsis altitude",
+  "  Circualization Completion",
+  "       Ballistic trajectory",
+  "Specific Impulse Commitment",
+  "        Tangential Velocity",
+];
+
+const art = [
+  "           ,:",
+  "  OK_____,'?|",
+  "        /   :    OK",
+  "  ALL SYSTEMS____/",
+  "   OK / />/",
+  "   /_/  ????",
+  "  __/?  /        OK",
+  "  )'-. /_________/",
+  " ./*o :\\ ",
+  " /.'*'",
+  " '/'",
+  "*+",
+  ".",
+  "",
+];
+
 const printTextDone = new Event("printTextDone");
 const cons = document.querySelector("#console");
+const info = document.querySelector("#info");
+const ascii = document.querySelector("#ascii");
 
 // Make start button... start the game
 document.querySelector("#start").addEventListener("click", startGame);
@@ -94,7 +124,9 @@ function updateScreenChar(text, index, toSpace) {
     // running = false;
     cons.innerHTML = `${cons.innerHTML.slice(0, cons.innerHTML.length - 28)}${
       toSpace ? " " : ""
-    }${text.slice(index, text.length).replace(/\n/g, "<br>")}<span class="blink">█</span>`;
+    }${text
+      .slice(index, text.length)
+      .replace(/\n/g, "<br>")}<span class="blink">█</span>`;
     document.getElementsByClassName("blink")[0].scrollIntoView();
     window.dispatchEvent(printTextDone);
     return;
@@ -161,6 +193,7 @@ function textPath(path) {
 function startGame() {
   running = true;
   if (!init3DStuff) init3D();
+  controlPanel();
   document.querySelector("#start").style.opacity = "0";
   document.querySelector("#title").style.opacity = "0";
   document.querySelector("#credits").style.opacity = "0";
@@ -226,4 +259,33 @@ function init3D() {
     );
     camera.position.z = 5;
   });
+}
+
+
+// display random crap on the side of the screen that does literally nothing and is completely useless
+// nice comment ↗
+function controlPanel() {
+  ascii.innerHTML = info.innerHTML = "<pre>";
+  for (let i = 0; i < garble.length - 1; i++)
+    info.innerHTML += `${garble[i].replace(RegExp(/ /g), "&nbsp;")}: ${
+      Math.random() >= 0.5 ? "+" : "-"
+    }${("000" + Math.floor(Math.random() * 1000)).slice(-3)}<br>`;
+
+  for (let i = 0; i < art.length - 1; i++)
+    ascii.innerHTML += art[i].replace(RegExp(/ /g), "&nbsp;") + "<br>";
+  ascii.innerHTML += "<br>Dampening code: ";
+
+  for (let i = 0; i < 8; i++)
+    ascii.innerHTML += String.fromCharCode(65 + Math.floor(Math.random() * 26));
+  ascii.innerHTML += "</pre>";
+  info.innerHTML += "<br><br>";
+
+  for (let i = 0; i < 8; i++) {
+    info.innerHTML += `${"&nbsp;".repeat(8)}Orbital pd ${i}: ${"█".repeat(
+      1 + Math.floor(Math.random() * 14)
+    )}<br>`;
+  }
+  info.innerHTML += "</pre>";
+
+  setTimeout(() => controlPanel(), 5000);
 }
