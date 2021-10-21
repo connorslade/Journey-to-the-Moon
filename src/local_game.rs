@@ -42,6 +42,8 @@ pub fn local_hame(data: Question) {
         to_print.push_str(&question.question);
         to_print.push_str("\n\n");
 
+        // *THE* nested condtional
+        // 🏆️
         if question.end.is_some() {
             if question.end.unwrap() {
                 delay_print(&format!("{}You Win!", to_print));
