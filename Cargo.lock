@@ -4,9 +4,9 @@ version = 3
 
 [[package]]
 name = "afire"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "16be1cacdfb679f167cb91b2326fab3af8191dddeff6fbbcacf56142349edda1"
+checksum = "e04513185dc269627800b15a51eac74eb3ced73f3d134ead14eaa99b2db98613"
 
 [[package]]
 name = "itoa"

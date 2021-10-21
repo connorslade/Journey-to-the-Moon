@@ -72,6 +72,9 @@ p {
   overflow-y: scroll;
   scrollbar-width: none;
 }
+.consolePane::-webkit-scrollbar {
+  display: none;
+}
 
 .infoPane {
   box-sizing: border-box;

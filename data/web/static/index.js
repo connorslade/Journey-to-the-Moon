@@ -77,7 +77,7 @@ window.addEventListener("keydown", (e) => {
       cons.innerHTML.length - 28
     )}${"<br><br>"}<span class="blink">█</span>`;
 
-    textPath(`${this_path.join("-")}-${parseInt(input)}`);
+    textPath(`${this_path.join("-")}-${parseInt(input) - 1}`);
   }
 
   if (e.key === "r") {
@@ -169,6 +169,7 @@ function textPath(path) {
 
       if ("answer" in data) {
         data.answer.forEach((item, i) => {
+          i++;
           validOptions = validOptions.concat(i.toString().split(""));
           options += `${i}) ${item.option}\n`;
         });

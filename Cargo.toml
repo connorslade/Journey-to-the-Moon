@@ -4,6 +4,6 @@ version = "0.1.0"
 edition = "2018"
 
 [dependencies]
-afire = {version = "0.1.4", features = ["logging"]}
+afire = {version = "0.1.6", features = ["logging"]}
 simple_config_parser = "0.1.6"
 serde_json = "1.0.68"
