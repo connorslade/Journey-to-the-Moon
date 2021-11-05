@@ -12,7 +12,7 @@ mod parse;
 mod server;
 use parse::Question;
 
-pub const VERSION: &str = "1.0.1";
+pub const VERSION: &str = "1.0.2";
 const TREE_PATH: &str = "data/tree.json";
 
 // ... much bodge

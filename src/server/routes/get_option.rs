@@ -31,11 +31,8 @@ pub fn add_route(server: &mut Server) {
             this_question = &this_question.answer[i];
         }
 
-        let resp = this_question.clone().jsonify();
-        Response::new(
-            200,
-            &resp,
-            vec![Header::new("Content-Type", "application/json")],
-        )
+        Response::new()
+            .text(this_question.clone().jsonify())
+            .header(Header::new("Content-Type", "application/json"))
     });
 }
